@@ -1,3 +1,9 @@
+# Flyerr
+![image](https://user-images.githubusercontent.com/9285034/190879747-282b4afd-f265-49a8-a41e-6cf8cb70f59b.png)
+
+## Overview
+A read-only catalog of your [Plex](https://plex.tv) Media Server, meant to be a "flyer" when you quickly want to show your cool legal movies to your friends without having to creating an account for them.
+
 ## Usage
 
 ### Running the production version
