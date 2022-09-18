@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useEffect, useMemo, useState } from 'react'
 import styles from '../styles/Home.module.scss'
 
-const GalleryItem = ({ item }) => {
+const GalleryItem = ({ item }: { item: any }) => {
   const [ metadata, setMetadata ] = useState<any>(null)
   const [ link, setLink ] = useState<string>('')
 
@@ -12,7 +12,7 @@ const GalleryItem = ({ item }) => {
     const meta = await fetch(`/api/metadata?key=${item.key}`);
     const data = await meta.json();
     setMetadata(data);
-    const imdbCode = data?.Guid?.find(g => g.id.startsWith('imdb'))?.id.split('//')[1];
+    const imdbCode = data?.Guid?.find((g: any) => g.id.startsWith('imdb'))?.id.split('//')[1];
     setLink(`https://imdb.com/title/${imdbCode}`);
   }
   
