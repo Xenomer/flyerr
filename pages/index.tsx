@@ -2,17 +2,19 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useMemo, useState } from 'react'
+import { PlexMedia, PlexMediaMetadata } from '../lib/types'
 import styles from '../styles/Home.module.scss'
 
 const GalleryItem = ({ item }: { item: any }) => {
-  const [ metadata, setMetadata ] = useState<any>(null)
+  const [ metadata, setMetadata ] = useState<PlexMediaMetadata | null>(null)
   const [ link, setLink ] = useState<string>('')
 
   const onHover = async () => {
     const meta = await fetch(`/api/metadata?key=${item.key}`);
-    const data = await meta.json();
+    const data: PlexMediaMetadata = await meta.json();
     setMetadata(data);
-    const imdbCode = data?.Guid?.find((g: any) => g.id.startsWith('imdb'))?.id.split('//')[1];
+    console.log(data)
+    const imdbCode = data?.Guid?.find(g => g.id.startsWith('imdb'))?.id.split('//')[1];
     setLink(`https://imdb.com/title/${imdbCode}`);
   }
   
@@ -45,7 +47,7 @@ const GalleryItem = ({ item }: { item: any }) => {
 }
 
 const Gallery = ({ library, filter }: { library: string, filter: string }) => {
-  const [ items, setItems ] = useState<any[]>([]);
+  const [ items, setItems ] = useState<PlexMedia[]>([]);
 
   useEffect(() => {
     fetch('/api/libraries/' + library)
